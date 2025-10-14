@@ -1,40 +1,174 @@
-// import React from 'react';
-// import Button from '../UI/Button/Button';
-// import styles from "./Header.module.scss";
-// import {HeaderProps} from "../../types/types.ts";
-//
-// const Header: React.FC<HeaderProps> = ( {
-//     onCartClick,
-//     cartItemsCount = 0
-//                                         }) => {
-//     return (
-//         <header className={styles.header}>
-//                 <div className={styles.logo}>
-//                     <h1 className={styles.logoText}>Vegetable</h1>
-//                     <span className={styles.tagline}>
-//                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="33" fill="none">
-//                             <rect width="80" height="33" fill="#54b46a" rx="16.5"/>
-//                             <path fill="#fff"
-//                                 d="M21.531 12.276q-.113-1.01-.937-1.563-.824-.561-2.074-.561-.895 0-1.548.284-.654.277-1.016.767a1.8 1.8 0 0 0-.355 1.101q0 .519.241.895.25.376.647.632.404.248.866.419.462.163.888.27l1.42.37q.696.17 1.428.46.732.292 1.356.768t1.009 1.179q.39.704.39 1.683 0 1.236-.639 2.195-.631.959-1.84 1.512-1.2.554-2.904.554-1.633 0-2.827-.518-1.193-.519-1.867-1.47-.675-.96-.746-2.273h2.201q.064.789.512 1.314.455.519 1.157.774a4.7 4.7 0 0 0 1.556.249q.93 0 1.655-.291.73-.3 1.15-.824.42-.533.42-1.243 0-.647-.37-1.058-.362-.412-.987-.682a9.6 9.6 0 0 0-1.4-.476l-1.718-.469q-1.747-.476-2.77-1.399-1.016-.924-1.016-2.443 0-1.257.682-2.195t1.847-1.456q1.164-.525 2.628-.525 1.477 0 2.606.518 1.136.519 1.79 1.428.653.901.682 2.074zM26.47 23V8.455h2.195v6.32h7.251v-6.32h2.202V23h-2.202v-6.342h-7.251V23zm27.479-7.273q0 2.33-.852 4.006-.853 1.67-2.337 2.571-1.477.895-3.36.895-1.888 0-3.373-.895-1.477-.901-2.33-2.578-.852-1.676-.852-3.999 0-2.33.852-3.998.853-1.677 2.33-2.571 1.484-.902 3.374-.902 1.881 0 3.359.902 1.484.894 2.337 2.57.852 1.67.852 4m-2.173 0q0-1.775-.576-2.99-.569-1.222-1.562-1.846-.987-.633-2.237-.633-1.258 0-2.245.633-.987.624-1.562 1.846-.57 1.215-.569 2.99 0 1.776.569 2.997.575 1.215 1.562 1.847.987.625 2.245.625 1.25 0 2.237-.625.994-.632 1.562-1.847.576-1.221.576-2.997M56.684 23V8.455h5.185q1.697 0 2.812.617 1.115.619 1.67 1.69.552 1.066.553 2.401 0 1.342-.561 2.415-.555 1.066-1.676 1.69-1.116.618-2.806.618h-3.565v-1.86h3.367q1.072 0 1.74-.37.667-.376.98-1.023.312-.645.312-1.47 0-.824-.312-1.463a2.24 2.24 0 0 0-.987-1.001q-.669-.362-1.762-.362H58.88V23z"/>
-//                         </svg>
-//                     </span>
-//                 </div>
-//                 {/* Кнопка корзины */}
-//                 <div className={styles.actions}>
-//                     <Button
-//                         onClick={onCartClick}
-//                         variant = 'primary'
-//                     >
-//                         Корзина
-//                         {cartItemsCount > 0 && (
-//                             <span className={styles.badge}>
-//                                 {cartItemsCount}
-//                             </span>
-//                         )}
-//                     </Button>
-//                 </div>
-//         </header>
-//     );
-// };
-//
-// export default Header;
+import { HeaderProps } from "../../types/types.ts";
+import React from 'react';
+import { Text, Button, Badge } from '@mantine/core';
+
+const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
+    const buttonWidth = cartItemsCount > 0 ? 174 : 144;
+
+    return (
+        <header style={{
+            width: '1440px',
+            height: '59px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingRight: '20px',
+            paddingLeft: '20px',
+            margin: '0 auto'
+        }}>
+            {/* Блок логотипа */}
+            <div
+                style={{
+                    width: '209px',
+                    height: '33px',
+                    paddingLeft: '12px',
+                    gap: '8px',
+                    borderRadius: '31px',
+                    background: '#F7F7F7',
+                    display: 'flex',
+                    alignItems: 'center',
+                }}
+            >
+                {/* Vegetable Text с нулевыми отступами */}
+                <Text
+                    style={{
+                        width: '109px',
+                        height: '27px',
+                        opacity: 0.9,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        letterSpacing: '0%',
+                        margin: 0,
+                        padding: 0,
+                    }}
+                    fw={600}
+                    size="22px"
+                    lh="100%"
+                >
+                    Vegetable
+                </Text>
+
+                {/* SHOP Text с нулевыми отступами */}
+                <div
+                    style={{
+                        width: '80px',
+                        height: '33px',
+                        borderRadius: '21px',
+                        backgroundColor: '#54B46A',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <Text
+                        fw={600}
+                        size="14px"
+                        style={{
+                            lineHeight: '1',
+                            color: 'white',
+                            margin: 0,
+                            padding: 0,
+                        }}
+                    >
+                        SHOP
+                    </Text>
+                </div>
+            </div>
+
+            {/* Кнопка */}
+            <Button
+                variant="filled"
+                onClick={onCartClick}
+                leftSection={
+                    cartItemsCount > 0 ? (
+                        <Badge
+                            style={{
+                                backgroundColor: 'white',
+                                color: '#54B46A',
+                                width: '20px',
+                                height: '20px',
+                                padding: '3px 9px',
+                                fontSize: '12px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: '36px',
+                                border: 'none',
+                                minWidth: '20px',
+                                gap: '9px',
+                            }}
+                        >
+                            {cartItemsCount}
+                        </Badge>
+                    ) : undefined
+                }
+                rightSection={
+                    <svg
+                        width="20"
+                        height="20"
+                        fill="none"
+                        style={{ opacity: 1 }}
+                    >
+                        <path fill="#fff" d="M1 .16a.833.833 0 0 0 0 1.667zm1.91.834.805-.218A.83.83 0 0 0 2.91.161zm3.105 11.463-.804.217c.108.401.495.661.907.61zm9.552-1.194.104.826a.83.83 0 0 0 .712-.658zM17 4.337l.816.169A.833.833 0 0 0 17 3.504zm-13.184 0-.804.218zM1 1.827h1.91V.161H1zm5.118 11.457 9.553-1.195-.207-1.653-9.552 1.194zm10.265-1.853 1.433-6.925-1.632-.338-1.433 6.926zM2.106 1.211l.906 3.344 1.608-.436L3.715.776zm.906 3.344 2.199 8.12 1.608-.436-2.199-8.12zM17 3.504H3.816V5.17H17zm-8.833 12.08c0 .23-.187.416-.417.416v1.667c1.15 0 2.083-.933 2.083-2.084zM7.75 16a.417.417 0 0 1-.417-.417H5.667c0 1.15.932 2.084 2.083 2.084zm-.417-.417c0-.23.187-.416.417-.416V13.5c-1.15 0-2.083.933-2.083 2.083zm.417-.416c.23 0 .417.186.417.416h1.666c0-1.15-.932-2.083-2.083-2.083zm7.083.416c0 .23-.186.417-.416.417v1.667c1.15 0 2.083-.933 2.083-2.084zm-.416.417a.417.417 0 0 1-.417-.417h-1.667c0 1.15.933 2.084 2.084 2.084zM14 15.583c0-.23.187-.416.417-.416V13.5c-1.15 0-2.084.933-2.084 2.083zm.417-.416c.23 0 .416.186.416.416H16.5c0-1.15-.933-2.083-2.083-2.083z"/>
+                    </svg>
+                }
+                styles={{
+                    root: {
+                        width: buttonWidth,
+                        height: '44px',
+                        padding: '10px 40px',
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 600,
+                        backgroundColor: '#54B46A',
+                        borderRadius: '8px',
+                        border: 'none',
+                        boxShadow: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                        opacity: 1,
+                        gap: '10px',
+                    },
+                    inner: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        flexDirection: 'row',
+                    },
+                    section: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: 0,
+                    },
+                    label: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        width: 'auto',
+                    }
+                }}
+            >
+                <Text
+                    fw={600}
+                    size="16px"
+                    lh="24px"
+                    style={{
+                        color: 'white',
+                        margin: 0,
+                        padding: 0,
+                    }}
+                >
+                    Cart
+                </Text>
+            </Button>
+        </header>
+    );
+};
+
+export default Header;

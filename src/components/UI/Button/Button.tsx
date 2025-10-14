@@ -1,20 +1,21 @@
 // import React from "react";
-// import styles from './Button.module.scss'
-// import {ButtonProps} from "../../../types/types.ts";
+// import { Button as MantineButton } from '@mantine/core';
+// import { ButtonProps } from "../../../types/types.ts";
 //
 // const Button: React.FC<ButtonProps> = ({
-//     children,
-//     onClick,
-//     variant = "primary",
-//     disabled = false,
+//                                            children,
+//                                            onClick,
+//                                            variant = "filled",
+//                                            disabled = false,
 //                                        }) => {
 //     return (
-//         <button
-//         className={`${styles.button} ${styles[variant]}`}
-//         onClick={onClick}
-//         disabled={disabled}>
+//         <MantineButton
+//             variant={variant}
+//             onClick={onClick}
+//             disabled={disabled}
+//         >
 //             {children}
-//         </button>
+//         </MantineButton>
 //     );
 // }
 //
