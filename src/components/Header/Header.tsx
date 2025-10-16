@@ -7,14 +7,16 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
 
     return (
         <header style={{
-            width: '1440px',
+            minWidth: '1440px',
+            width: '100%',
             height: '59px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingRight: '20px',
             paddingLeft: '20px',
-            margin: '0 auto'
+            margin: '0 auto',
+            background: '#FFFFFF',
         }}>
             {/* Блок логотипа */}
             <div
