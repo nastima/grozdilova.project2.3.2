@@ -7,7 +7,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
     return (
         <Card
-            shadow="sm"
             padding="16px"
             style={{
                 width: '302px',
@@ -43,26 +42,54 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                     height: '30px',
                     opacity: 1,
                     display: 'flex',
-                    justify: 'space-around',
+                    justifyContent: 'space-between',
                     border: '2px solid blue',
                     margin: '0 16px',
                 }}
             >
-                <Text
-                    fw={600}
-                    size="lg"
-                    style={{
-                        lineHeight: '1.2'
-                    }}
-                >
-                    {product.name}
-                </Text>
-
-                {/* Кастомный счетчик с текстовыми кнопками +/- и Badge */}
-                <Group
+                {/* Название и вес отдельно */}
+                <div
                     style={{
                         display: 'flex',
+                        alignItems: 'baseline',
+                        gap: '12px',
                     }}>
+
+                    {/* Название */}
+                    <Text
+                        style={{
+                            fontFamily: 'Inter',
+                            fontWeight: '600',
+                            fontSize: '18px',
+                            leadingTrim: 'NONE',
+                            lineHeight: '155%',
+                            letterSpacing: '0%',
+                        }}
+                    >
+                        {product.name.split(' - ')[0]}
+                    </Text>
+
+                    {/* Вес */}
+                    <Text
+                        style={{
+                            width:'28px',
+                            height: '20px',
+                            display: 'flex',
+                            fontFamily: 'Open Sans',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            leadingTrim: 'NONE',
+                            lineHeight: '20px',
+                            letterSpacing: '0%',
+                            color:'#868E96',
+                        }}
+                    >
+                        {product.name.split(' - ')[1]?.toLowerCase() || ''}
+                    </Text>
+                </div>
+
+                {/* Кастомный счетчик */}
+                <Group style={{ display: 'flex' }}>
                     <Button
                         variant="outline"
                         size="xs"
@@ -109,6 +136,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                     border: '2px solid yellow',
                     margin: '0 16px',
                 }}>
+
+                {/* Цена */}
                 <Text
                     fw={700}
                     size="xl"
@@ -122,6 +151,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                     ${product.price}
                 </Text>
 
+                {/* Кнопка добавления в корзину */}
                 <Button
                     variant="filled"
                     onClick={() => {

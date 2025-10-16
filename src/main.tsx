@@ -4,7 +4,6 @@ import { MantineProvider, createTheme } from '@mantine/core'
 import App from './App.tsx'
 import './index.css'
 
-// Самая простая тема
 const theme = createTheme({
     primaryColor: 'green',
     colors: {
@@ -21,7 +20,7 @@ const theme = createTheme({
             '#2a7a3f'
         ],
     },
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Open Sans, Inter, sans-serif',
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
