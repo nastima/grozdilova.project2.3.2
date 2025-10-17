@@ -18,10 +18,12 @@ export interface Product {
 export interface ProductCardProps {
     product: Product;
     onAddToCart: (product: Product) => void;
+    isLoading?: boolean;
 }
 
 //  пропсы для сетки
 export interface ProductGridProps {
     products: Product[];
     onAddToCart: (product: Product) => void;
+    loading?: boolean
 }

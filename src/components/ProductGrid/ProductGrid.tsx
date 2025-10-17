@@ -2,7 +2,10 @@ import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import {ProductGridProps} from '../../types/types'
 
-const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart, loading = false  }) => {
+    const displayProducts = loading
+        ? Array(8).fill({ id: 'loading', name: '', price: 0, image: '' })
+        : products;
     return (
         <div
             style={{
@@ -17,11 +20,12 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
                 gap: '24px',
             }}
         >
-            {products.map((product) => (
+            {displayProducts.map((product, index) => (
                 <ProductCard
-                    key={product.id}
+                    key={loading ? `loading-${index}` : product.id}
                     product={product}
                     onAddToCart={onAddToCart}
+                    isLoading={loading}
                 />
             ))}
         </div>

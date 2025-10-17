@@ -1,12 +1,17 @@
 import { HeaderProps } from "../../types/types.ts";
 import React from 'react';
 import { Text, Button, Badge } from '@mantine/core';
+import { useMantineTheme } from '@mantine/core';
 
 const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
+    const theme = useMantineTheme();
     const buttonWidth = cartItemsCount > 0 ? 174 : 144;
 
     return (
         <header style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 1000,
             minWidth: '1440px',
             width: '100%',
             height: '59px',
@@ -16,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
             paddingRight: '20px',
             paddingLeft: '20px',
             margin: '0 auto',
-            background: '#FFFFFF',
+            background: theme.white,
         }}>
             {/* Блок логотипа */}
             <div
@@ -26,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                     paddingLeft: '12px',
                     gap: '8px',
                     borderRadius: '31px',
-                    background: '#F7F7F7',
+                    background: theme.colors.gray[0],
                     display: 'flex',
                     alignItems: 'center',
                 }}
@@ -57,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                         width: '80px',
                         height: '33px',
                         borderRadius: '21px',
-                        backgroundColor: '#54B46A',
+                        backgroundColor: theme.colors.green[6],
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -68,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                         size="14px"
                         style={{
                             lineHeight: '1',
-                            color: 'white',
+                            color: theme.white,
                             margin: 0,
                             padding: 0,
                         }}
@@ -84,23 +89,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                 onClick={onCartClick}
                 leftSection={
                     cartItemsCount > 0 ? (
-                        <Badge
-                            style={{
-                                backgroundColor: 'white',
-                                color: '#54B46A',
-                                width: '20px',
-                                height: '20px',
-                                padding: '3px 9px',
-                                fontSize: '12px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                borderRadius: '36px',
-                                border: 'none',
-                                minWidth: '20px',
-                                gap: '9px',
-                            }}
-                        >
+                        <Badge variant="small">
                             {cartItemsCount}
                         </Badge>
                     ) : undefined
@@ -122,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                         padding: '10px 40px',
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 600,
-                        backgroundColor: '#54B46A',
+                        backgroundColor: theme.colors.green[6],
                         borderRadius: '8px',
                         border: 'none',
                         boxShadow: 'none',
@@ -146,28 +135,10 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         margin: 0,
-                    },
-                    label: {
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '10px',
-                        width: 'auto',
                     }
                 }}
             >
-                <Text
-                    fw={600}
-                    size="16px"
-                    lh="24px"
-                    style={{
-                        color: 'white',
-                        margin: 0,
-                        padding: 0,
-                    }}
-                >
-                    Cart
-                </Text>
+                Cart
             </Button>
         </header>
     );

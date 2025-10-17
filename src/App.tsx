@@ -7,12 +7,30 @@ import './App.css'
 const App: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [cartItemsCount, setCartItemsCount] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // Загрузка данных из API
-        fetch('https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json')
-            .then(response => response.json())
-            .then(data => setProducts(data));
+        setLoading(true);
+
+        // Искусственная задержка 3 секунды для тестирования loader
+        setTimeout(() => {
+            fetch('https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch products');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setProducts(data);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    setError(error.message);
+                    setLoading(false);
+                });
+        }, 3000); // 3 секунды задержки
     }, []);
 
     const handleAddToCart = (product: Product) => {
@@ -57,10 +75,29 @@ const App: React.FC = () => {
                 </h1>
             </div>
 
-            <ProductGrid
-                products={products}
-                onAddToCart={handleAddToCart}
-            />
+            {/* Отображаем ошибку если есть */}
+            {error && (
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '400px',
+                        marginTop: '180px',
+                        color: 'red',
+                        fontSize: '18px',
+                    }}
+                >
+                    Error: {error}
+                </div>
+            )}
+
+            {/* ProductGrid показывается ВСЕГДА */}
+                <ProductGrid
+                    products={products}
+                    onAddToCart={handleAddToCart}
+                    loading={loading}
+                />
         </div>
     );
 };
