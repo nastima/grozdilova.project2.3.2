@@ -225,6 +225,30 @@ const theme = createTheme({
                         lineHeight: '24px',
                         color: theme.colors.gray[11],
                     }),
+                    // Vegetable text в логотипе
+                    ...(params.variant === 'logoVegetable' && {
+                        width: '109px',
+                        height: '27px',
+                        opacity: 0.9,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        letterSpacing: '0%',
+                        margin: 0,
+                        padding: 0,
+                        fontWeight: 600,
+                        fontSize: '22px',
+                        lineHeight: '100%',
+                    }),
+                    // SHOP text в логотипе
+                    ...(params.variant === 'logoShop' && {
+                        lineHeight: '1',
+                        color: theme.white,
+                        margin: 0,
+                        padding: 0,
+                        fontWeight: 600,
+                        fontSize: '14px',
+                    }),
                 }
             })
         },

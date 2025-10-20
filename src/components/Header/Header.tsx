@@ -36,27 +36,12 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                     alignItems: 'center',
                 }}
             >
-                {/* Vegetable Text с нулевыми отступами */}
-                <Text
-                    style={{
-                        width: '109px',
-                        height: '27px',
-                        opacity: 0.9,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        letterSpacing: '0%',
-                        margin: 0,
-                        padding: 0,
-                    }}
-                    fw={600}
-                    size="22px"
-                    lh="100%"
-                >
+                {/* Vegetable Text */}
+                <Text variant="logoVegetable">
                     Vegetable
                 </Text>
 
-                {/* SHOP Text с нулевыми отступами */}
+                {/* SHOP Text */}
                 <div
                     style={{
                         width: '80px',
@@ -68,16 +53,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                         justifyContent: 'center',
                     }}
                 >
-                    <Text
-                        fw={600}
-                        size="14px"
-                        style={{
-                            lineHeight: '1',
-                            color: theme.white,
-                            margin: 0,
-                            padding: 0,
-                        }}
-                    >
+                    <Text variant="logoShop">
                         SHOP
                     </Text>
                 </div>
