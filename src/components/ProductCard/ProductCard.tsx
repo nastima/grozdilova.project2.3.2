@@ -46,9 +46,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                         </div>
 
                         {/* - количество + */}
-                        <Group style={{ display: 'flex', width: '90px', height: '30px' }}>
-                            <ActionIcon onClick={() => setQuantity(prev => Math.max(1, prev - 1))}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
+                        <Group
+                            style={{
+                                display: 'flex',
+                                width: '90px',
+                                height: '30px',
+                            }}>
+                            <ActionIcon
+                                onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                                styles={{
+                                    root: {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }
+                                }}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="12"
+                                     height="2"
+                                     fill="none"
+                                     style={{
+                                         display: 'block',
+                                     }}>
                                     <path fill={theme.colors.gray[10]} d="M0 2V0h12v2z"/>
                                 </svg>
                             </ActionIcon>
@@ -72,7 +92,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                             height: '44px',
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alignItems: 'baseline',
+                            alignItems: 'center',
                             margin: '0 16px',
                         }}
                     >
@@ -91,26 +111,35 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                                 setQuantity(1);
                             }}
                             rightSection={
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="19"
-                                    height="19"
-                                    fill="none"
-                                >
-                                    <path fill={theme.colors.green[8]} d="M1.5.66a.833.833 0 1 0 0 1.667zm1.91.834.805-.218A.83.83 0 0 0 3.41.661zm3.105 11.463-.804.217c.108.401.495.661.907.61zm9.552-1.194.104.826a.83.83 0 0 0 .712-.658zM17.5 4.837l.816.169a.833.833 0 0 0-.816-1.002zm-13.184 0-.804.218zM1.5 2.327h1.91V.661H1.5zm5.118 11.457 9.553-1.195-.207-1.653-9.552 1.194zm10.265-1.853 1.433-6.925-1.632-.338-1.433 6.926zM2.606 1.711l.906 3.344 1.608-.436-.905-3.343zm.906 3.344 2.199 8.12 1.608-.436-2.199-8.12zM17.5 4.004H4.316V5.67H17.5zm-8.833 12.08c0 .23-.187.416-.417.416v1.667c1.15 0 2.083-.933 2.083-2.084zm-.417.416a.417.417 0 0 1-.417-.417H6.167c0 1.15.932 2.084 2.083 2.084zm-.417-.417c0-.23.187-.416.417-.416V14c-1.15 0-2.083.933-2.083 2.083zm.417-.416c.23 0 .417.186.417.416h1.666c0-1.15-.932-2.083-2.083-2.083zm7.083.416c0 .23-.186.417-.416.417v1.667c1.15 0 2.083-.933 2.083-2.084zm-.416.417a.417.417 0 0 1-.417-.417h-1.667c0 1.15.933 2.084 2.084 2.084zm-.417-.417c0-.23.187-.416.417-.416V14c-1.15 0-2.084.933-2.084 2.083zm.417-.416c.23 0 .416.186.416.416H17c0-1.15-.933-2.083-2.083-2.083z"/>
-                                </svg>
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '20px',
+                                    height: '20px'
+                                }}>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="19"
+                                        height="19"
+                                        fill="none"
+                                    >
+                                        <path fill={theme.colors.green[8]} d="M1.5.66a.833.833 0 1 0 0 1.667zm1.91.834.805-.218A.83.83 0 0 0 3.41.661zm3.105 11.463-.804.217c.108.401.495.661.907.61zm9.552-1.194.104.826a.83.83 0 0 0 .712-.658zM17.5 4.837l.816.169a.833.833 0 0 0-.816-1.002zm-13.184 0-.804.218zM1.5 2.327h1.91V.661H1.5zm5.118 11.457 9.553-1.195-.207-1.653-9.552 1.194zm10.265-1.853 1.433-6.925-1.632-.338-1.433 6.926zM2.606 1.711l.906 3.344 1.608-.436-.905-3.343zm.906 3.344 2.199 8.12 1.608-.436-2.199-8.12zM17.5 4.004H4.316V5.67H17.5zm-8.833 12.08c0 .23-.187.416-.417.416v1.667c1.15 0 2.083-.933 2.083-2.084zm-.417.416a.417.417 0 0 1-.417-.417H6.167c0 1.15.932 2.084 2.083 2.084zm-.417-.417c0-.23.187-.416.417-.416V14c-1.15 0-2.083.933-2.083 2.083zm.417-.416c.23 0 .417.186.417.416h1.666c0-1.15-.932-2.083-2.083-2.083zm7.083.416c0 .23-.186.417-.416.417v1.667c1.15 0 2.083-.933 2.083-2.084zm-.416.417a.417.417 0 0 1-.417-.417h-1.667c0 1.15.933 2.084 2.084 2.084zm-.417-.417c0-.23.187-.416.417-.416V14c-1.15 0-2.084.933-2.084 2.083zm.417-.416c.23 0 .416.186.416.416H17c0-1.15-.933-2.083-2.083-2.083z"/>
+                                    </svg>
+                                </div>
                             }
                             styles={{
                                 root: {
                                     width: '204px',
-                                    height: '44px',
-                                    borderRadius: '8px',
-                                    fontSize: '16px',
-                                    fontWeight: 600,
-                                }
+                                },
+                                inner: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                },
                             }}
                         >
-                            Add to cart
+                                Add to cart
                         </Button>
                     </Group>
                 </>
