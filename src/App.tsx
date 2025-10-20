@@ -30,7 +30,7 @@ const App: React.FC = () => {
                     setError(error.message);
                     setLoading(false);
                 });
-        }, 3000); // 3 секунды задержки
+        }, 3000);
     }, []);
 
     const handleAddToCart = (product: Product) => {

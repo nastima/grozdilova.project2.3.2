@@ -45,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                             </Text>
                         </div>
 
-                        {/* Кастомный счетчик */}
+                        {/* - количество + */}
                         <Group style={{ display: 'flex', width: '90px', height: '30px' }}>
                             <ActionIcon onClick={() => setQuantity(prev => Math.max(1, prev - 1))}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">

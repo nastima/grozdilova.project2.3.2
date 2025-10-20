@@ -133,18 +133,18 @@ const theme = createTheme({
                     lineHeight: '24px',
                     // Primary Button
                     ...(params.variant === 'filled' && {
-                        backgroundColor: theme.colors.green[6], // #54b46a
+                        backgroundColor: theme.colors.green[6],
                         color: theme.white,
                         '&:hover': {
-                            backgroundColor: theme.colors.green[8], // #3b944e
+                            backgroundColor: theme.colors.green[8],
                         }
                     }),
                     // Secondary Button
                     ...(params.variant === 'light' && {
-                        backgroundColor: theme.colors.green[0], // #eafbee (#E7FAEB)
-                        color: theme.colors.green[8], // #3b944e
+                        backgroundColor: theme.colors.green[0],
+                        color: theme.colors.green[8],
                         '&:hover': {
-                            backgroundColor: theme.colors.green[1], // #dbf2e0 (#D6F0DC)
+                            backgroundColor: theme.colors.green[1],
                         }
                     })
                 }
@@ -183,7 +183,6 @@ const theme = createTheme({
                 }
             })
         },
-
         Image: {
             styles: {
                 root: {
@@ -194,7 +193,6 @@ const theme = createTheme({
                 }
             }
         },
-
         Text: {
             defaultProps: {
                 variant: 'default',
@@ -207,7 +205,7 @@ const theme = createTheme({
                         fontWeight: 600,
                         fontSize: '18px',
                         lineHeight: '155%',
-                        color: theme.colors.gray[10], // #212529
+                        color: theme.colors.gray[10],
                     }),
                     // Стиль для веса товара
                     ...(params.variant === 'productWeight' && {
@@ -215,7 +213,7 @@ const theme = createTheme({
                         fontWeight: 600,
                         fontSize: '14px',
                         lineHeight: '20px',
-                        color: theme.colors.gray[7], // #868E96
+                        color: theme.colors.gray[7],
                     }),
                     // Стиль для цены
                     ...(params.variant === 'productPrice' && {
