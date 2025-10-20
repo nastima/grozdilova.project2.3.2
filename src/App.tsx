@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ProductGrid from './components/ProductGrid/ProductGrid';
 import Header from "./components/Header/Header";
-import { Product } from './types/types';
+import { Product, CartItem  } from './types/types';
+import CartPopup from './components/CartPopup/CartPopup';
 import './App.css'
 
 const App: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
-    const [cartItemsCount, setCartItemsCount] = useState(0);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [isCartOpen, setIsCartOpen] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         setLoading(true);
@@ -26,27 +27,55 @@ const App: React.FC = () => {
                     setProducts(data);
                     setLoading(false);
                 })
-                .catch(error => {
-                    setError(error.message);
+                .catch(() => {
                     setLoading(false);
                 });
         }, 3000);
     }, []);
 
     const handleAddToCart = (product: Product) => {
-        setCartItemsCount(prev => prev + 1);
-        console.log('Added to cart:', product.name);
+        setCartItems(prev => {
+            const existingItem = prev.find(item => item.id === product.id);
+            if (existingItem) {
+                return prev.map(item =>
+                    item.id === product.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                );
+            } else {
+                return [...prev, {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                }];
+            }
+        });
+    };
+
+    const handleUpdateQuantity = (id: number, quantity: number) => {
+        if (quantity === 0) {
+            setCartItems(prev => prev.filter(item => item.id !== id));
+        } else {
+            setCartItems(prev =>
+                prev.map(item =>
+                    item.id === id ? { ...item, quantity } : item
+                )
+            );
+        }
     };
 
     const handleCartClick = () => {
-        // Логика открытия корзины
-        console.log('Cart clicked');
+        setIsCartOpen(true);
     };
+
+    const totalItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
         <div style={{ position: 'relative', minHeight: '100vh' }}>
             <Header
-                cartItemsCount={cartItemsCount}
+                cartItemsCount={totalItemsCount}
                 onCartClick={handleCartClick}
             />
 
@@ -68,36 +97,25 @@ const App: React.FC = () => {
                         margin: 0,
                         lineHeight: '40px',
                         letterSpacing: '0%',
-
                     }}
                 >
                     Catalog
                 </h1>
             </div>
 
-            {/* Отображаем ошибку если есть */}
-            {error && (
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '400px',
-                        marginTop: '180px',
-                        color: 'red',
-                        fontSize: '18px',
-                    }}
-                >
-                    Error: {error}
-                </div>
-            )}
+            <ProductGrid
+                products={products}
+                onAddToCart={handleAddToCart}
+                loading={loading}
+            />
 
-            {/* ProductGrid показывается ВСЕГДА */}
-                <ProductGrid
-                    products={products}
-                    onAddToCart={handleAddToCart}
-                    loading={loading}
-                />
+            {/* Popup корзины */}
+            <CartPopup
+                cartItems={cartItems}
+                isOpen={isCartOpen}
+                onClose={() => setIsCartOpen(false)}
+                onUpdateQuantity={handleUpdateQuantity}
+            />
         </div>
     );
 };

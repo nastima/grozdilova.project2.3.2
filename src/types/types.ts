@@ -1,4 +1,3 @@
-
 //  пропсы для шапки
 export interface HeaderProps {
     onCartClick: () => void;
@@ -26,4 +25,21 @@ export interface ProductGridProps {
     products: Product[];
     onAddToCart: (product: Product) => void;
     loading?: boolean
+}
+
+//  пропсы для корзины
+export interface CartItem {
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+    quantity: number;
+}
+
+//  пропсы для кнопки корзины
+export interface CartProps {
+    cartItems: CartItem[];
+    isOpen: boolean;
+    onClose: () => void;
+    onUpdateQuantity: (id: number, quantity: number) => void;
 }

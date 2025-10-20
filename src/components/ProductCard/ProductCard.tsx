@@ -17,9 +17,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                 <>
                     <Image
                         src={product.image}
-                        height={276}
-                        width={276}
+                        variant="productImage"
                         alt={product.name}
+                        radius="8px"
                     />
 
                     {/* Первая строка: Название товара и количество */}
