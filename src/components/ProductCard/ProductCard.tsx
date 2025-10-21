@@ -1,16 +1,27 @@
 import React from 'react';
-import { Card, Image, Text, Button, Group, Badge, ActionIcon } from "@mantine/core";
+import { Card, Image, Text, Button, Group } from "@mantine/core";
 import { ProductCardProps } from "../../types/types.ts";
 import { useMantineTheme } from '@mantine/core';
+import {QuantityStepper} from "../QuantityStepper/QuantityStepper.tsx";
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoading = false  }) => {
     const theme = useMantineTheme();
     const [quantity, setQuantity] = React.useState(1);
+    const [isHovered, setIsHovered] = React.useState(false);
+
+    // Определяем вариант карточки в зависимости от состояния
+    const getCardVariant = () => {
+        if (isLoading) return "loading";
+        if (isHovered) return "hover";
+        return "default";
+    }
 
     return (
         <Card
-            variant={isLoading ? "loading" : "default"}
+            variant={getCardVariant()}
             padding="16px"
+            onMouseEnter={() => !isLoading && setIsHovered(true)}
+            onMouseLeave={() => !isLoading && setIsHovered(false)}
         >
             {!isLoading ? (
                 // Контент для обычного состояния
@@ -46,43 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                         </div>
 
                         {/* - количество + */}
-                        <Group
-                            style={{
-                                display: 'flex',
-                                width: '90px',
-                                height: '30px',
-                            }}>
-                            <ActionIcon
-                                onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                                styles={{
-                                    root: {
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                    }
-                                }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="12"
-                                     height="2"
-                                     fill="none"
-                                     style={{
-                                         display: 'block',
-                                     }}>
-                                    <path fill={theme.colors.gray[10]} d="M0 2V0h12v2z"/>
-                                </svg>
-                            </ActionIcon>
-
-                            <Badge variant="clear">
-                                {quantity}
-                            </Badge>
-
-                            <ActionIcon onClick={() => setQuantity(prev => prev + 1)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none">
-                                    <path fill={theme.colors.gray[10]} d="M7 0H5v5H0v2h5v5h2V7h5V5H7z"/>
-                                </svg>
-                            </ActionIcon>
-                        </Group>
+                        <QuantityStepper value={quantity} onChange={setQuantity} />
                     </Group>
 
                     {/* Вторая строка: Цена и кнопка добавления в корзину */}
@@ -98,26 +73,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                     >
                         {/* Цена */}
                         <Text variant="productPrice">
-                            ${product.price}
+                            $ {product.price}
                         </Text>
 
                         {/* Кнопка добавления в корзину */}
                         <Button
                             variant="light"
                             onClick={() => {
-                                for (let i = 0; i < quantity; i++) {
-                                    onAddToCart(product);
-                                }
+                                onAddToCart(product, quantity);
                                 setQuantity(1);
                             }}
                             rightSection={
-                                <div style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: '20px',
-                                    height: '20px'
-                                }}>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        width: '20px',
+                                        height: '20px'
+                                    }}
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="19"
@@ -139,26 +114,30 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                                 },
                             }}
                         >
-                                Add to cart
+                            Add to cart
                         </Button>
                     </Group>
                 </>
             ) : (
                 // Контент для состояния loading
-                <div style={{
-                    width: '100%',
-                    height: '100%',
-                    padding: '16px 10px 0 16px',
-            }}>
-                    <div style={{
-                        width: '276px',
-                        height: '276px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: '8px',
-                        backgroundColor: theme.colors.gray[1],
-                    }}>
+                <div
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        padding: '16px 10px 0 16px',
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '276px',
+                            height: '276px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '8px',
+                            backgroundColor: theme.colors.gray[1],
+                        }}
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" fill="none">
                             <rect width="2.444" height="19.556" fill="#ced4da" rx="1.222"/>
                             <rect width="2.444" height="6.519" x="4.889" y="6.518" fill="#ced4da" rx="1.222"/>
@@ -167,9 +146,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                             <rect width="2.444" height="19.556" x="19.555" fill="#ced4da" rx="1.222"/>
                         </svg>
                     </div>
-
-        </div>
-    )}
+                </div>
+            )}
         </Card>
     );
 };

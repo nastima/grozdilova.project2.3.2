@@ -16,14 +16,14 @@ export interface Product {
 //  пропсы для карточек
 export interface ProductCardProps {
     product: Product;
-    onAddToCart: (product: Product) => void;
+    onAddToCart: (product: Product, quantity: number) => void;
     isLoading?: boolean;
 }
 
 //  пропсы для сетки
 export interface ProductGridProps {
     products: Product[];
-    onAddToCart: (product: Product) => void;
+    onAddToCart: (product: Product, quantity: number) => void;
     loading?: boolean
 }
 
@@ -42,4 +42,11 @@ export interface CartProps {
     isOpen: boolean;
     onClose: () => void;
     onUpdateQuantity: (id: number, quantity: number) => void;
+}
+// пропсы для степпера
+export interface QuantityStepperProps {
+    value?: number;
+    onChange?: (value: number) => void;
+    min?: number;
+    max?: number;
 }

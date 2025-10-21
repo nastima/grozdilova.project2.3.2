@@ -8,29 +8,29 @@ const theme = createTheme({
     primaryColor: 'green',
     colors: {
         green: [
-            '#eafbee', // 0: #E7FAEB (secondary default)
-            '#dbf2e0', // 1: #D6F0DC (secondary hover)
+            '#eafbee',
+            '#dbf2e0',
             '#b9e1c2',
             '#94d0a1',
             '#74c186',
             '#60b874',
-            '#54b46a', // 6: основной зеленый (primary default)
+            '#54b46a',
             '#449e59',
-            '#3b944e', // 8: primary hover
+            '#3b944e',
             '#2a7a3f'
         ],
         gray: [
-            '#FFFFFF', // white
-            '#F7F7F7', // фон логотипа
-            '#F1F3F5', // extra light gray
-            '#E9ECEF', // very light gray
-            '#DEE2E6', // фон кнопок степпера
-            '#CED4DA', // medium light gray
-            '#ADB5BD', // medium gray
-            '#868E96', // для badge color
-            '#495057', // dark gray
-            '#343A40', // very dark gray
-            '#212529', // цвет текста
+            '#FFFFFF',
+            '#F7F7F7',
+            '#F1F3F5',
+            '#E9ECEF',
+            '#DEE2E6',
+            '#CED4DA',
+            '#ADB5BD',
+            '#868E96',
+            '#495057',
+            '#343A40',
+            '#212529',
         ]
     },
     fontFamily: 'Open Sans, Inter, sans-serif',
@@ -40,18 +40,19 @@ const theme = createTheme({
                 variant: 'light',
                 size: '30px',
             },
-            styles: {
+            styles: (theme: any) => ({
                 root: {
                     width: '30px',
                     height: '30px',
+                    cursor: 'pointer',
                     borderRadius: '8px',
-                    backgroundColor: '#DEE2E6',
+                    backgroundColor: theme.colors.gray[4],
                     border: 'none',
                     '&:hover': {
-                        backgroundColor: '#CED4DA',
+                        backgroundColor: theme.colors.gray[5],
                     }
                 }
-            }
+            })
         },
         Badge: {
             defaultProps: {
@@ -127,6 +128,7 @@ const theme = createTheme({
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '10px',
+                    cursor: 'pointer',
                     fontFamily: 'Inter',
                     fontWeight: 600,
                     fontSize: '16px',
@@ -164,6 +166,7 @@ const theme = createTheme({
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '16px',
+                    cursor: 'pointer',
                     // State="Default"
                     ...(params.variant === 'default' && {
                         boxShadow: 'none',
@@ -184,9 +187,9 @@ const theme = createTheme({
             })
         },
         Image: {
-            styles: (theme: any, params: { variant?: string }) => ({
+            styles: (_theme: any, params: { variant?: string }) => ({
                 root: {
-                    // Стиль для изображений в корзине
+                    // Стиль корзине
                     ...(params.variant === 'cartImage' && {
                         width: '64px',
                         height: '64px',
@@ -194,7 +197,7 @@ const theme = createTheme({
                         flexShrink: 0,
                     }),
 
-                    // Стиль для изображений в карточках продуктов
+                    // Стиль для карточек
                     ...(params.variant === 'productImage' && {
                         width: '276px',
                         height: '276px',
@@ -202,12 +205,14 @@ const theme = createTheme({
                     }),
                 },
                 image: {
+                    // Стиль для изображений в корзине
                     ...(params.variant === 'cartImage' && {
                         width: '64px',
                         height: '64px',
                         borderRadius: '1.86px',
                         objectFit: 'cover',
                     }),
+                    // Стиль для изображений в карточках продуктов
                     ...(params.variant === 'productImage' && {
                         width: '276px',
                         height: '276px',
@@ -247,7 +252,7 @@ const theme = createTheme({
                         lineHeight: '24px',
                         color: theme.colors.gray[11],
                     }),
-                    // Vegetable text в логотипе
+                    // Vegetable в логотипе
                     ...(params.variant === 'logoVegetable' && {
                         width: '109px',
                         height: '27px',
@@ -262,7 +267,7 @@ const theme = createTheme({
                         fontSize: '22px',
                         lineHeight: '100%',
                     }),
-                    // SHOP text в логотипе
+                    // SHOP в логотипе
                     ...(params.variant === 'logoShop' && {
                         lineHeight: '1',
                         color: theme.white,
@@ -270,14 +275,6 @@ const theme = createTheme({
                         padding: 0,
                         fontWeight: 600,
                         fontSize: '14px',
-                    }),
-                    // Стили для корзины
-                    ...(params.variant === 'cartTitle' && {
-                        fontFamily: 'Inter',
-                        fontWeight: 600,
-                        fontSize: '20px',
-                        lineHeight: '24px',
-                        color: theme.colors.gray[9],
                     }),
                     // Стили для текста в пустом попапе
                     ...(params.variant === 'emptyCartText' && {
@@ -289,6 +286,7 @@ const theme = createTheme({
                         color: theme.colors.gray[6],
                         textAlign: 'center',
                     }),
+                    // Стили для названия продуктов в попапе
                     ...(params.variant === 'cartProductName' && {
                         fontFamily: 'Inter',
                         fontWeight: 600,
@@ -296,6 +294,7 @@ const theme = createTheme({
                         lineHeight: '155%',
                         color: theme.colors.gray[9],
                     }),
+                    // Стили для веса 1кг в попапе
                     ...(params.variant === 'cartProductWeight' && {
                         fontFamily: 'Open Sans',
                         fontWeight: 600,
@@ -303,6 +302,7 @@ const theme = createTheme({
                         lineHeight: '20px',
                         color: theme.colors.gray[6],
                     }),
+                    // Стили для цены в попапе
                     ...(params.variant === 'cartProductPrice' && {
                         fontFamily: 'Inter',
                         fontWeight: 600,
@@ -310,13 +310,7 @@ const theme = createTheme({
                         lineHeight: '24px',
                         color: theme.colors.gray[9],
                     }),
-                    ...(params.variant === 'cartQuantity' && {
-                        fontFamily: 'Inter',
-                        fontWeight: 600,
-                        fontSize: '16px',
-                        lineHeight: '24px',
-                        color: theme.colors.gray[9],
-                    }),
+                    // Стили для текста в попапе
                     ...(params.variant === 'cartTotalText' && {
                         fontFamily: 'Inter',
                         fontWeight: 600,
@@ -325,6 +319,7 @@ const theme = createTheme({
                         color: theme.black,
                         textAlign: 'center',
                     }),
+                    // Стили для общей цены в попапе
                     ...(params.variant === 'cartTotalPrice' && {
                         fontFamily: 'Inter',
                         fontWeight: 600,
@@ -372,12 +367,14 @@ const theme = createTheme({
                     }),
                 },
                 body: {
+                    // Модалка с товарами
                     ...(params.variant === 'cartWithItems' && {
                         padding: 0,
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '12px',
                     }),
+                    // Модалка пустой корзины
                     ...(params.variant === 'cartEmpty' && {
                         padding: 0,
                         display: 'flex',
@@ -385,94 +382,6 @@ const theme = createTheme({
                         alignItems: 'center',
                         gap: '24px',
                         justifyContent: 'center',
-                    }),
-                }
-            })
-        },
-        Divider: {
-            styles: (params: { variant?: string }) => ({
-                root: {
-                    // Разделитель в корзине между товарами
-                    ...(params.variant === 'cartItemDivider' && {
-                        width: '320px',
-                        height: '1px',
-                        minWidth: '276px',
-                        paddingLeft: '76px',
-                        display: 'flex',
-                        alignItems: 'center',
-                    }),
-                    // Разделитель в корзине
-                    ...(params.variant === 'cartTotalDivider' && {
-                        width: '396px',
-                        height: '1px',
-                    }),
-                },
-                line: {
-                    ...(params.variant === 'cartItemDivider' && {
-                        width: '320px',
-                        height: '1px',
-                        backgroundColor: '#DEE2E6',
-                        border: 'none',
-                    }),
-                }
-            })
-        },
-        Group: {
-            styles: (params: { variant?: string }) => ({
-                root: {
-                    // Группа товаров(контейнер + разделитель)
-                    ...(params.variant === 'cartItemGroupDivider' && {
-                        width: '396px',
-                        height: '80px',
-                        gap: '16px',
-                        opacity: 1,
-                    }),
-                    // Группа товаров
-                    ...(params.variant === 'cartItemGroup' && {
-                        width: '396px',
-                        height: '64px',
-                        gap: '12px',
-                        opacity: 1,
-                    }),
-                    // Группа информации
-                    ...(params.variant === 'cartItemInfo' && {
-                        width: '320px',
-                        height: '62px',
-                        gap: '4px',
-                        opacity: 1,
-                    }),
-                    // Название и вес
-                    ...(params.variant === 'cartNameWeight' && {
-                        width: '320px',
-                        height: '28px',
-                        gap: '4px',
-                        opacity: 1,
-                    }),
-                    // Цена и счетчик
-                    ...(params.variant === 'cartPriceCounter' && {
-                        width: '320px',
-                        height: '30px',
-                        justifyContent: 'space-between',
-                        opacity: 1,
-                    }),
-                    // Итоговая сумма(контейнер+разделитель)
-                    ...(params.variant === 'cartTotalDivider' && {
-                        width: '396px',
-                        height: '36px',
-                        gap: '12px',
-                        opacity: 1,
-                    }),
-                    // Итоговая сумма
-                    ...(params.variant === 'cartTotal' && {
-                        width: '396px',
-                        height: '24px',
-                        justifyContent: 'space-between',
-                        opacity: 1,
-                    }),
-                    // Счетчик в корзине
-                    ...(params.variant === 'cartCounter' && {
-                        gap: '8px',
-                        alignItems: 'center',
                     }),
                 }
             })

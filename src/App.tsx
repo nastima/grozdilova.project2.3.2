@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ProductGrid from './components/ProductGrid/ProductGrid';
 import Header from "./components/Header/Header";
-import { Product, CartItem  } from './types/types';
+import { Product, CartItem } from './types/types';
 import CartPopup from './components/CartPopup/CartPopup';
-import './App.css'
+import './App.css';
 
 const App: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -14,7 +14,7 @@ const App: React.FC = () => {
     useEffect(() => {
         setLoading(true);
 
-        // Искусственная задержка 3 секунды для тестирования loader
+        // имитация загрузки для теста лоадера
         setTimeout(() => {
             fetch('https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json')
                 .then(response => {
@@ -33,13 +33,15 @@ const App: React.FC = () => {
         }, 3000);
     }, []);
 
-    const handleAddToCart = (product: Product) => {
+    // добавление товара в корзину
+    const handleAddToCart = (product: Product, quantity: number = 1) => {
         setCartItems(prev => {
             const existingItem = prev.find(item => item.id === product.id);
+
             if (existingItem) {
                 return prev.map(item =>
                     item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? { ...item, quantity: item.quantity + quantity }
                         : item
                 );
             } else {
@@ -48,14 +50,16 @@ const App: React.FC = () => {
                     name: product.name,
                     price: product.price,
                     image: product.image,
-                    quantity: 1
+                    quantity: quantity
                 }];
             }
         });
     };
 
+    // изменение количества товара (через степпер)
     const handleUpdateQuantity = (id: number, quantity: number) => {
         if (quantity === 0) {
+            // если количество 0 — удаляем из корзины
             setCartItems(prev => prev.filter(item => item.id !== id));
         } else {
             setCartItems(prev =>
@@ -66,10 +70,12 @@ const App: React.FC = () => {
         }
     };
 
+    // открыть корзину
     const handleCartClick = () => {
         setIsCartOpen(true);
     };
 
+    // общее количество товаров в корзине
     const totalItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
@@ -103,13 +109,14 @@ const App: React.FC = () => {
                 </h1>
             </div>
 
+            {/* Сетка товаров */}
             <ProductGrid
                 products={products}
                 onAddToCart={handleAddToCart}
                 loading={loading}
             />
 
-            {/* Popup корзины */}
+            {/* Popup корзины со степпером */}
             <CartPopup
                 cartItems={cartItems}
                 isOpen={isCartOpen}
