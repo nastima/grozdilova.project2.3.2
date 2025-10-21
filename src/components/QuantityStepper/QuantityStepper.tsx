@@ -39,6 +39,7 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
         >
             <ActionIcon
                 onClick={handleDecrement}
+                data-testid="decrement-btn"
                 styles={{
                     root: {
                         display: 'flex',
@@ -58,10 +59,11 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
                 </svg>
             </ActionIcon>
 
-            <Badge variant="clear">{internalValue}</Badge>
+            <Badge variant="clear" data-testid="quantity-value">{internalValue}</Badge>
 
             <ActionIcon
                 onClick={handleIncrement}
+                data-testid="increment-btn"
                 styles={{
                     root: {
                         display: 'flex',
