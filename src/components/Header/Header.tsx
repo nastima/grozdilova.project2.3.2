@@ -6,6 +6,12 @@ import { useMantineTheme } from '@mantine/core';
 const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
     const theme = useMantineTheme();
     const buttonWidth = cartItemsCount > 0 ? 174 : 144;
+    const [isButtonHovered, setIsButtonHovered] = React.useState(false);
+
+    const getButtonVariant = () => {
+        if (isButtonHovered) return "filled-hover";
+        return "filled";
+    }
 
     return (
         <header style={{
@@ -63,8 +69,10 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
 
             {/* Кнопка */}
             <Button
-                variant="filled"
+                variant={getButtonVariant()}
                 onClick={onCartClick}
+                onMouseEnter={() => setIsButtonHovered(true)}
+                onMouseLeave={() => setIsButtonHovered(false)}
                 leftSection={
                     cartItemsCount > 0 ? (
                         <Badge variant="small">
@@ -85,28 +93,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick }) => {
                 styles={{
                     root: {
                         width: buttonWidth,
-                        height: '44px',
                         padding: '10px 40px',
-                        fontFamily: 'Inter, sans-serif',
-                        fontWeight: 600,
-                        backgroundColor: theme.colors.green[6],
-                        borderRadius: '8px',
-                        border: 'none',
-                        boxShadow: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                        opacity: 1,
-                        gap: '10px',
-                    },
-                    inner: {
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '10px',
-                        flexDirection: 'row',
                     },
                     section: {
                         display: 'flex',

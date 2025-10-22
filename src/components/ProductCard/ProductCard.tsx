@@ -8,12 +8,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
     const theme = useMantineTheme();
     const [quantity, setQuantity] = React.useState(1);
     const [isHovered, setIsHovered] = React.useState(false);
+    const [isButtonHovered, setIsButtonHovered] = React.useState(false);
 
     // Определяем вариант карточки в зависимости от состояния
     const getCardVariant = () => {
         if (isLoading) return "loading";
         if (isHovered) return "hover";
         return "default";
+    }
+
+    // Определяем вариант кнопки в зависимости от состояния
+    const getButtonVariant = () => {
+        if (isButtonHovered) return "light-hover";
+        return "light";
     }
 
     return (
@@ -83,11 +90,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
 
                         {/* Кнопка добавления в корзину */}
                         <Button
-                            variant="light"
+                            variant={getButtonVariant()}
                             onClick={() => {
                                 onAddToCart(product, quantity);
                                 setQuantity(1);
                             }}
+                            onMouseEnter={() => setIsButtonHovered(true)}
+                            onMouseLeave={() => setIsButtonHovered(false)}
                             rightSection={
                                 <div
                                     style={{

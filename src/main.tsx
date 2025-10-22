@@ -133,21 +133,25 @@ const theme = createTheme({
                     fontWeight: 600,
                     fontSize: '16px',
                     lineHeight: '24px',
+                    opacity: 1,
                     // Primary Button
                     ...(params.variant === 'filled' && {
                         backgroundColor: theme.colors.green[6],
                         color: theme.white,
-                        '&:hover': {
-                            backgroundColor: theme.colors.green[8],
-                        }
                     }),
                     // Secondary Button
                     ...(params.variant === 'light' && {
                         backgroundColor: theme.colors.green[0],
                         color: theme.colors.green[8],
-                        '&:hover': {
-                            backgroundColor: theme.colors.green[1],
-                        }
+                    }),
+                    // Hover state
+                    ...(params.variant === 'filled-hover' && {
+                        backgroundColor: theme.colors.green[8],
+                        color: theme.white,
+                    }),
+                    ...(params.variant === 'light-hover' && {
+                        backgroundColor: theme.colors.green[1],
+                        color: theme.colors.green[8],
                     })
                 },
                 inner: {
@@ -181,6 +185,9 @@ const theme = createTheme({
                         boxShadow: '0px 2px 8px 0px #21252914, 0px 1px 2px 0px #2125291A',
                         '&:hover': {
                             boxShadow: '0px 4px 12px 0px #2125291A',
+                        },
+                        '& *': {
+                            pointerEvents: 'auto',
                         }
                     }),
                     // State="Loading"
@@ -188,7 +195,7 @@ const theme = createTheme({
                         boxShadow: '0px 2px 8px 0px #21252914, 0px 1px 2px 0px #2125291A',
                         height: '412px',
                     })
-                }
+                },
             })
         },
         Image: {
