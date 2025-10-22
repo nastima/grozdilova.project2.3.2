@@ -124,6 +124,7 @@ const CartPopup: React.FC<CartProps> = ({
                                                 <QuantityStepper
                                                     value={item.quantity}
                                                     onChange={(value) => onUpdateQuantity(item.id, value)}
+                                                    min={0}
                                                 />
                                             </div>
                                         </div>

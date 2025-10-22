@@ -10,7 +10,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart, loadin
         <div
             style={{
                 width: '1280px',
-                height: '3508px',
+                minHeight: '500px',
                 opacity: 1,
                 position: 'absolute',
                 top: '208px',
@@ -18,6 +18,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart, loadin
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: '24px',
+                paddingBottom: '119px',
             }}
         >
             {displayProducts.map((product, index) => (

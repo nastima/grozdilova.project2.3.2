@@ -10,8 +10,8 @@ beforeAll(() => {
             matches: false,
             media: query,
             onchange: null,
-            addListener: vi.fn(), // устаревшее
-            removeListener: vi.fn(), // устаревшее
+            addListener: vi.fn(),
+            removeListener: vi.fn(),
             addEventListener: vi.fn(),
             removeEventListener: vi.fn(),
             dispatchEvent: vi.fn(),

@@ -70,9 +70,9 @@ const App: React.FC = () => {
         }
     };
 
-    // открыть корзину
+    // toggle (открыть корзину/закрыть корзину)
     const handleCartClick = () => {
-        setIsCartOpen(true);
+        setIsCartOpen(prev => !prev);
     };
 
     // общее количество товаров в корзине
@@ -84,7 +84,7 @@ const App: React.FC = () => {
                 cartItemsCount={totalItemsCount}
                 onCartClick={handleCartClick}
             />
-
+            <div>
             {/* Заголовок Catalog */}
             <div
                 style={{
@@ -115,6 +115,7 @@ const App: React.FC = () => {
                 onAddToCart={handleAddToCart}
                 loading={loading}
             />
+            </div>
 
             {/* Popup корзины со степпером */}
             <CartPopup
