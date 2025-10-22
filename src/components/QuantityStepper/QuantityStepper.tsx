@@ -16,18 +16,25 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
     React.useEffect(() => {
         if (value !== undefined) setInternalValue(value);
     }, [value]);
-
+    // функция уменьшения
     const handleDecrement = () => {
         const newValue = Math.max(min, internalValue - 1);
-        setInternalValue(newValue);
-        onChange?.(newValue);
+        if (newValue !== internalValue) {
+            setInternalValue(newValue);
+            onChange?.(newValue);
+        }
     };
-
+    // функция увеличения
     const handleIncrement = () => {
         const newValue = max ? Math.min(max, internalValue + 1) : internalValue + 1;
-        setInternalValue(newValue);
-        onChange?.(newValue);
+        if (newValue !== internalValue) {
+            setInternalValue(newValue);
+            onChange?.(newValue);
+        }
     };
+
+    const isDecrementDisabled = internalValue <= min;
+    const isIncrementDisabled = max !== undefined && internalValue >= max;
 
     return (
         <Group
@@ -39,12 +46,14 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
         >
             <ActionIcon
                 onClick={handleDecrement}
+                disabled={isDecrementDisabled}
                 data-testid="decrement-btn"
                 styles={{
                     root: {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        opacity: isDecrementDisabled ? 0.3 : 1,
                     },
                 }}
             >
@@ -63,12 +72,14 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
 
             <ActionIcon
                 onClick={handleIncrement}
+                disabled={isIncrementDisabled}
                 data-testid="increment-btn"
                 styles={{
                     root: {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        opacity: isIncrementDisabled ? 0.3 : 1,
                     },
                 }}
             >

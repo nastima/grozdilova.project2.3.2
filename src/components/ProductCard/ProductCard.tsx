@@ -57,7 +57,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                         </div>
 
                         {/* - количество + */}
-                        <QuantityStepper value={quantity} onChange={setQuantity} />
+                        <QuantityStepper
+                            value={quantity}
+                            onChange={setQuantity}
+                            min={1}
+                            max={10}
+                        />
                     </Group>
 
                     {/* Вторая строка: Цена и кнопка добавления в корзину */}
@@ -103,16 +108,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                                     </svg>
                                 </div>
                             }
-                            styles={{
-                                root: {
-                                    width: '204px',
-                                },
-                                inner: {
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '10px',
-                                },
-                            }}
                         >
                             Add to cart
                         </Button>

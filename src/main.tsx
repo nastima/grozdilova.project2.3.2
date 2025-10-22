@@ -119,7 +119,7 @@ const theme = createTheme({
             },
             styles: (theme: any, params: { variant?: string }) => ({
                 root: {
-                    width: '207px',
+                    width: '204px',
                     height: '44px',
                     borderRadius: '8px',
                     border: 'none',
@@ -149,7 +149,12 @@ const theme = createTheme({
                             backgroundColor: theme.colors.green[1],
                         }
                     })
-                }
+                },
+                inner: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                },
             })
         },
         Card: {

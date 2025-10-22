@@ -125,6 +125,7 @@ const CartPopup: React.FC<CartProps> = ({
                                                     value={item.quantity}
                                                     onChange={(value) => onUpdateQuantity(item.id, value)}
                                                     min={0}
+                                                    max={10}
                                                 />
                                             </div>
                                         </div>
