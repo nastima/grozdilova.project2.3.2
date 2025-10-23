@@ -29,6 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
             padding="16px"
             onMouseEnter={() => !isLoading && setIsHovered(true)}
             onMouseLeave={() => !isLoading && setIsHovered(false)}
+            data-testid="product-card"
         >
             {!isLoading ? (
                 // Контент для обычного состояния
@@ -38,6 +39,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                         variant="productImage"
                         alt={product.name}
                         radius="8px"
+                        data-testid="product-image"
                     />
 
                     {/* Первая строка: Название товара и количество */}
@@ -53,12 +55,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                         {/* Название и вес отдельно */}
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
                             {/* Название */}
-                            <Text variant="productName">
+                            <Text variant="productName" data-testid="product-name">
                                 {product.name.split(' - ')[0]}
                             </Text>
 
                             {/* Вес */}
-                            <Text variant="productWeight">
+                            <Text variant="productWeight" data-testid="product-weight">
                                 {product.name.split(' - ')[1]?.toLowerCase() || ''}
                             </Text>
                         </div>
@@ -84,7 +86,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                         }}
                     >
                         {/* Цена */}
-                        <Text variant="productPrice">
+                        <Text variant="productPrice" data-testid="product-price">
                             $ {product.price}
                         </Text>
 
@@ -97,6 +99,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
                             }}
                             onMouseEnter={() => setIsButtonHovered(true)}
                             onMouseLeave={() => setIsButtonHovered(false)}
+                            data-testid="add-to-cart-btn"
                             rightSection={
                                 <div
                                     style={{
@@ -125,6 +128,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isLoadi
             ) : (
                 // Контент для состояния loading
                 <div
+                    data-testid="product-card-loading"
                     style={{
                         width: '100%',
                         height: '100%',
