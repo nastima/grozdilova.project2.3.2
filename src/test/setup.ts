@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/vitest';
-import { beforeAll, vi } from 'vitest';
+import { beforeAll, afterEach,  vi } from 'vitest';
+import { cleanup } from '@testing-library/react';
 
 // Мок window.matchMedia для Mantine
 beforeAll(() => {
@@ -17,4 +18,9 @@ beforeAll(() => {
             dispatchEvent: vi.fn(),
         })),
     });
+});
+
+// Автоматическая очистка после каждого теста
+afterEach(() => {
+    cleanup();
 });
