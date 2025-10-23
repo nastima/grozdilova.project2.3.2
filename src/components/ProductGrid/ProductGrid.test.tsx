@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import ProductGrid from './ProductGrid';
 import { Product } from '../../types/types';
 
-// Мок для ProductCard должен быть полностью внутри vi.mock
+// Мок для ProductCard
 vi.mock('../ProductCard/ProductCard', () => {
     const ProductCardMock = vi.fn(({ product, isLoading }) => (
         <div
@@ -54,13 +54,13 @@ describe('ProductGrid Component', () => {
             category: 'vegetables'
         }
     ];
-
+    // Базовые пропсы
     const defaultProps = {
         products: mockProducts,
         onAddToCart: mockOnAddToCart,
         loading: false,
     };
-
+    // Очищаем все mock-вызовы между тестами
     beforeEach(() => {
         vi.clearAllMocks();
     });
@@ -161,7 +161,7 @@ describe('ProductGrid Component', () => {
         });
     });
 
-    // 5. Упрощенные тесты без проверки вызовов мока (так как нельзя получить доступ к мок-функции)
+    // 5. Базовые тесты на главную функциональность
     describe('Basic functionality', () => {
         // Тест: Проверяем что компонент не падает при рендере
         it('renders without crashing', () => {
