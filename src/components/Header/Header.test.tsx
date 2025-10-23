@@ -29,6 +29,7 @@ describe('Header', () => {
     // Тест 2: Проверяем реакцию на клик по кнопке корзины
     it('calls onCartClick when button is clicked', () => {
         render(<Header {...defaultProps} />);
+
         fireEvent.click(screen.getByRole('button', { name: /cart/i }));
         expect(mockOnCartClick).toHaveBeenCalledTimes(1);
     });
@@ -36,12 +37,14 @@ describe('Header', () => {
     // Тест 3: Проверяем отображение бейджа когда в корзине есть товары
     it('shows badge when cart has items', () => {
         render(<Header {...defaultProps} cartItemsCount={5} />);
+
         expect(screen.getByText('5')).toBeInTheDocument();
     });
 
     // Тест 4: Проверяем что бейдж НЕ показывается когда корзина пустая
     it('does not show badge when cart is empty', () => {
         render(<Header {...defaultProps} cartItemsCount={0} />);
+
         expect(screen.queryByTestId('cart-badge')).not.toBeInTheDocument();
     });
 });
