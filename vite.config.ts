@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
     plugins: [react()],
-    base: '/grozdilova2.3.2/',
+    base: '/grozdilova.project2.3.2/',
 })
