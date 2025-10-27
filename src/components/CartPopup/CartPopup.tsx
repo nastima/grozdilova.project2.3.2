@@ -19,6 +19,7 @@ const CartPopup: React.FC<CartProps> = ({
             withCloseButton={false}
             size='auto'
             variant={cartItems.length === 0 ? 'cartEmpty' : 'cartWithItems'}
+            lockScroll={false}
         >
             {cartItems.length === 0 ? (
                 // Состояние пустой корзины
@@ -48,6 +49,10 @@ const CartPopup: React.FC<CartProps> = ({
                             display: 'flex',
                             flexDirection: 'column',
                             gap: '12px',
+                            maxHeight: '60vh',
+                            overflowY: 'auto',
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
                         }}
                     >
                         {cartItems.map((item, index) => (
@@ -148,6 +153,14 @@ const CartPopup: React.FC<CartProps> = ({
                             </div>
                         ))}
                     </div>
+                    {/* для Webkit браузеров (Chrome, Safari) */}
+                    <style>
+                        {`
+                            .cart-scroll::-webkit-scrollbar {
+                                display: none;
+                            }
+                        `}
+                    </style>
 
                     {/* Разделитель перед Total (396px width) */}
                     <div

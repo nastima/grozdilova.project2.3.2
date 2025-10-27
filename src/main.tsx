@@ -346,18 +346,24 @@ const theme = createTheme({
         Modal: {
             styles: (theme: any, params: { variant?: string }) => ({
                 root: {
-                    // Модалка с товарами
-                    ...(params.variant === 'cartWithItems' && {
-                        position: 'absolute',
-                        top: '71px',
-                        left: '976px',
-                    }),
-                    // Модалка пустой корзины
-                    ...(params.variant === 'cartEmpty' && {
-                        position: 'absolute',
-                        top: '71px',
-                        left: '1119px',
-                    }),
+                    // Фиксированное позиционирование с учетом скролла
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    pointerEvents: 'none',
+                },
+                inner: {
+                    // Позиционирование справа с учетом скролла
+                    position: 'absolute',
+                    top: '0',
+                    right: '0',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    paddingTop: '71px',
+                    pointerEvents: 'none',
                 },
                 content: {
                     // Модалка с товарами
@@ -367,6 +373,9 @@ const theme = createTheme({
                         padding: '24px',
                         background: theme.white,
                         boxShadow: '0px 2px 8px 0px #21252914, 0px 1px 2px 0px #2125291A',
+                        marginRight: '24px',
+                        pointerEvents: 'auto',
+                        overflow: 'hidden',
                     }),
                     // Модалка пустой корзины
                     ...(params.variant === 'cartEmpty' && {
@@ -376,6 +385,7 @@ const theme = createTheme({
                         padding: '24px',
                         background: theme.white,
                         boxShadow: '0px 2px 8px 0px #21252914, 0px 1px 2px 0px #2125291A',
+                        marginRight: '24px',
                     }),
                 },
                 body: {
@@ -395,7 +405,7 @@ const theme = createTheme({
                         gap: '24px',
                         justifyContent: 'center',
                     }),
-                }
+                },
             })
         },
     }
